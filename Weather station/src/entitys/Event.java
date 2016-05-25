@@ -7,6 +7,7 @@ public class Event {
 	private String observationStation;
 	private String creationDate;
 	private String expirationDate;
+	private String lastOccurance;
 	
 	
 	
@@ -55,5 +56,13 @@ public class Event {
 	}
 	public void setExpirationDate(String expirationDate) {
 		this.expirationDate = expirationDate;
+	}
+
+	public String getLastOccurance() {
+		return lastOccurance;
+	}
+
+	public void setLastOccurance(String lastOccurance) {
+		this.lastOccurance = lastOccurance;
 	}
 }

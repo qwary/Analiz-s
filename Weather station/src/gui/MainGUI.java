@@ -22,21 +22,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-//import lt.ktu.formbackend.model.Answer;
-//import lt.ktu.formbackend.model.Form;
-//import lt.ktu.formbackend.model.FormAnswer;
-//import lt.ktu.formbackend.model.FormAnswerContainer;
-//import lt.ktu.formbackend.model.FormsContainer;
-//import lt.ktu.formbackend.model.Question;
-//import lt.ktu.project.client.FormActions;
-//import lt.ktu.project.client.SearchParameters;
-//import lt.ktu.project.client.ServerCommunication;
-//import lt.ktu.projektas.events.onLogout;
-//import lt.ktu.projektas.field.Field;
-//import lt.ktu.projektas.tabs.FormTabPane;
-//import lt.ktu.projektas.utils.GUIForm;
-////import lt.ktu.projektas.utils.Form;
-//import lt.ktu.projektas.utils.User;
 
 
 
@@ -56,12 +41,15 @@ public class MainGUI extends Application{
 	private Menu menuUser;
 	private Menu menuTools;
 	private Menu menuUserTab;
+	private Menu menuStatistics;
 	private MenuItem menuUserLogout;
 	private MenuItem menuUserLogin;
 	private MenuItem menuUserRegister;
 	private MenuItem menuCreate;
 	private MenuItem menuSearch;
 	private MenuItem menuStationList;
+	private MenuItem menuViewUserEvents;
+	private MenuItem menuCreateStatistic;
 	
 	private final TableView<Event> table = new TableView<>();
 	private final ObservableList<Event> data =
@@ -120,37 +108,49 @@ public class MainGUI extends Application{
 		menuCreate.setOnAction(e -> {
 	//		CreateFormGUI box = new CreateFormGUI(this);
 		});
-		menuSearch = new MenuItem("Search");
+		
+		menuSearch = new MenuItem("Stations");
+		menuSearch.setOnAction(e -> {
+			SearchEventGUI box = new SearchEventGUI(this);
+		});
+		
 		menuStationList = new MenuItem("Stations list");
 		menuStationList.setOnAction(e -> {
 					StationsGUI box = new StationsGUI(this);
 		});
 		
 		menuUserTab = new Menu("User");
-		menuCreate = new MenuItem("UserTEST");
+		menuCreate = new MenuItem("Create Event");
 		menuCreate.setOnAction(e -> {
 					//StationsGUI box = new StationsGUI(this);
 		});
+		menuViewUserEvents = new MenuItem("My Events");
+		menuViewUserEvents.setOnAction(e -> {
+					//StationsGUI box = new StationsGUI(this);
+		});
 		
-		menuUserTab.getItems().addAll(menuCreate);
+		menuStatistics = new Menu("Statistics");
+		menuCreateStatistic = new MenuItem("Generate Statistics");
+		
+		menuStatistics.getItems().addAll(menuCreateStatistic);
+		menuUserTab.getItems().addAll(menuCreate, menuViewUserEvents);
 		menuUser.getItems().addAll(menuUserLogin, menuUserRegister);
 		menuTools.getItems().addAll(menuSearch, menuStationList);
-		menuBar.getMenus().addAll(menuUser, menuTools, menuUserTab);
-	//	Form pub[] = new Form[20];
+		menuBar.getMenus().addAll(menuUser, menuTools, menuStatistics, menuUserTab);	//	Form pub[] = new Form[20];
 	//	Form priv[] = new Form[20];
 		
 		
 		
 		//table.setEditable(true);
-		TableColumn firstNameCol = new TableColumn("Autorius");
+		TableColumn firstNameCol = new TableColumn("Author");
 		firstNameCol.setCellValueFactory(
                 new PropertyValueFactory<>("author"));
 		
-		TableColumn lastNameCol = new TableColumn("Pavadinimas");
+		TableColumn lastNameCol = new TableColumn("Name");
 		lastNameCol.setCellValueFactory(
                 new PropertyValueFactory<>("name"));
 		
-		TableColumn emailCol = new TableColumn("Aprasymas");
+		TableColumn emailCol = new TableColumn("Description");
 		emailCol.setCellValueFactory(
                 new PropertyValueFactory<>("description"));
 		
@@ -227,46 +227,3 @@ public class MainGUI extends Application{
 		this.stage = stage;
 		}
 	}
-	//	Runnable run = new Runnable() {
-			
-	//		@Override
-	//		public void run() {
-		//		ServerCommunication.open("Anonymous", "");
-				//tabs.openForm(new GUIForm(pub[0]), fac);
-				
-		//		FormsContainer formC = ServerCommunication.getForms(new SearchParameters("", "", "", 0, "", "", 0, "", ""));
-		//		ArrayList<Form> forms = formC.getForms();
-		//		formList.addForms(forms);
-		//		if(forms.size()>0)
-		//			tabs.openForm(new GUIForm(priv[0]), fac);
-//				if(formList.getPublicList().getItems().size() > 0){
-//					formList.getPublicList().getSelectionModel().select(0);
-//					formList.getPublicList().getFocusModel().focus(0);
-//				}else if(formList.getPrivateList().getItems().size() > 0){
-//					formList.getPrivateList().getSelectionModel().select(0);
-//					formList.getPrivateList().getFocusModel().focus(0);
-//				}
-//			}
-//		};
-//		LoadingGUI.show(run);
-//	}
-//	public FormTabPane getFormTabPane(){
-//		return tabs;
-//	}
-//	public FormList getFormList(){
-//		return formList;
-//	}
-//	public void showAnounymousMenuBar(){
-//		menuUser.getItems().clear();
-//		menuTools.getItems().clear();
-//		menuUser.getItems().addAll(menuUserLogin, menuUserRegister);
-//		menuTools.getItems().addAll(menuSearch);
-//	}
-//	public void showLoggedUserMenuBar(){
-//		menuTools.getItems().clear();
-//		menuUser.getItems().clear();
-//		menuUser.getItems().addAll(menuUserLogout);
-//		menuTools.getItems().addAll(menuCreate/*, menuSearch*/);
-
-//	}
-//}
