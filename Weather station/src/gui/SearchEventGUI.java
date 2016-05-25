@@ -48,6 +48,8 @@ public class SearchEventGUI {
 	    input = new TextField();
 	    input.setMaxWidth(Double.MAX_VALUE);
 	    
+	    
+	    
 	    Canvas canvas = new Canvas(600, 400);
 	    GraphicsContext gc = canvas.getGraphicsContext2D();
        // drawShapes(gc, 0, 0);

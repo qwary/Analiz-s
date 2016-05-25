@@ -63,6 +63,15 @@ public class MainGUI extends Application{
 	public void start(Stage stage) throws Exception {
 	
 		
+		
+		//TEST-ZONE-------------------------------------------------------------
+		String test = "2016-04-26";
+		double t;
+		String latitudeS = test.substring(test.indexOf('-')+1, test.lastIndexOf('-'));
+    	String longitudeS = test.substring(test.lastIndexOf('-')+1, test.length());
+		System.out.println(latitudeS + "     " + longitudeS);
+		//----------------------------------------------------------------------
+		
 		RowConstraints row1;
 		row1 = new RowConstraints();
 		row1.setPercentHeight(100);
@@ -131,6 +140,9 @@ public class MainGUI extends Application{
 		
 		menuStatistics = new Menu("Statistics");
 		menuCreateStatistic = new MenuItem("Generate Statistics");
+		menuCreateStatistic.setOnAction(e -> {
+			StatisticsGenerationGUI box = new StatisticsGenerationGUI(this);
+});
 		
 		menuStatistics.getItems().addAll(menuCreateStatistic);
 		menuUserTab.getItems().addAll(menuCreate, menuViewUserEvents);
