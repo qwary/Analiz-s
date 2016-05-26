@@ -1,10 +1,12 @@
 package gui;
 
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import entitys.Event;
 import entitys.EventList;
+import entitys.WeatherInformation;
 
 //import javax.ws.rs.client.Client;
 
@@ -53,7 +55,7 @@ public class MainGUI extends Application{
 	
 	private final TableView<Event> table = new TableView<>();
 	private final ObservableList<Event> data =
-            FXCollections.observableArrayList(new Event("Petras", "Apr", "TEST", "Station", "1991-04-05", "1999-08-14"));
+            FXCollections.observableArrayList(new Event("Petras", false, "Apr", "TEST", "Station", false, "1991-04-05", false, false, 0, "1999-08-14", null));
 	
 	
 	public static void main(String[] args){
@@ -63,14 +65,6 @@ public class MainGUI extends Application{
 	public void start(Stage stage) throws Exception {
 	
 		
-		
-		//TEST-ZONE-------------------------------------------------------------
-		String test = "2016-04-26";
-		double t;
-		String latitudeS = test.substring(test.indexOf('-')+1, test.lastIndexOf('-'));
-    	String longitudeS = test.substring(test.lastIndexOf('-')+1, test.length());
-		System.out.println(latitudeS + "     " + longitudeS);
-		//----------------------------------------------------------------------
 		
 		RowConstraints row1;
 		row1 = new RowConstraints();
@@ -84,24 +78,11 @@ public class MainGUI extends Application{
 	    pane.getColumnConstraints().addAll(col1, col2);
 	    pane.getRowConstraints().add(row1);
 	    pane.setHgap(10);
-	 //   tabs = new FormTabPane();
 
-
-//		formList = new FormList(this);
-//		formList.setPrefWidth(150);
-//		formList.setMaxHeight(Double.MAX_VALUE);
-//		tabs.setMaxWidth(Double.MAX_VALUE);
-//		tabs.setMaxHeight(Double.MAX_VALUE);
-//		pane.add(formList,0, 0);
-//	    pane.add(tabs, 1, 0);
-
-	//	pane.getStyleClass().add("warp");
-	//	pane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
 		menuBar = new MenuBar();
 		menuUser = new Menu("User");
 		menuUserLogout = new MenuItem("Logout");
-	//	menuUserLogout.setOnAction(new onLogout(this));
 		menuUserLogin = new MenuItem("Login");
 		menuUserLogin.setOnAction(e -> {
 			LoginGUI box = new LoginGUI(this);
@@ -115,10 +96,9 @@ public class MainGUI extends Application{
 		menuTools = new Menu("Tools");
 		menuCreate = new MenuItem("Create");
 		menuCreate.setOnAction(e -> {
-	//		CreateFormGUI box = new CreateFormGUI(this);
 		});
 		
-		menuSearch = new MenuItem("Stations");
+		menuSearch = new MenuItem("Search Events");
 		menuSearch.setOnAction(e -> {
 			SearchEventGUI box = new SearchEventGUI(this);
 		});
@@ -135,7 +115,7 @@ public class MainGUI extends Application{
 		});
 		menuViewUserEvents = new MenuItem("My Events");
 		menuViewUserEvents.setOnAction(e -> {
-					//StationsGUI box = new StationsGUI(this);
+					UserEventsGUI box = new UserEventsGUI(this);
 		});
 		
 		menuStatistics = new Menu("Statistics");
@@ -166,6 +146,10 @@ public class MainGUI extends Application{
 		emailCol.setCellValueFactory(
                 new PropertyValueFactory<>("description"));
 		
+		TableColumn occurCol = new TableColumn("Last Occurance");
+		occurCol.setCellValueFactory(
+                new PropertyValueFactory<>("occurance"));
+		
 //		TableColumn stationCol = new TableColumn("Station");
 //		emailCol.setCellValueFactory(
 //                new PropertyValueFactory<>("observationStation"));
@@ -179,18 +163,18 @@ public class MainGUI extends Application{
 //                new PropertyValueFactory<>("expirationDate"));
 		
 
-		table.getColumns().addAll(firstNameCol, lastNameCol, emailCol);
+		table.getColumns().addAll(firstNameCol, lastNameCol, emailCol, occurCol);
 //		table.getColumn(3).setMinWidth(0);
 //		table.getSelectionModel().getColumn(4).setMinWidth(0);
 //		table.getColumn(5).setMinWidth(0);
 		table.setItems(data);
 		
 		EventList testData = new EventList();
-		Event test1 = new Event("Test Name1", "Test description1", "Test1", "Station1", "1991-04-05", "1999-08-14");
-		Event test2 = new Event("Test Name2", "Test description2", "Test2", "Station2", "1991-04-05", "1999-08-14");
-		Event test3 = new Event("Test Name3", "Test description3", "Test3", "Station3", "1991-04-05", "1999-08-14");
-		Event test4 = new Event("Test Name4", "Test description4", "Test4", "Station4", "1991-04-05", "1999-08-14");
-		Event test5 = new Event("Test Name5", "Test description5", "Test5", "Station5", "1991-04-05", "1999-08-14");
+		Event test1 = new Event("Test Name1", false, "Test description1", "Test1", "Station1", false, "1991-04-05", false, false, 0, "1999-08-14", "1999-08-14");
+		Event test2 = new Event("Test Name2", false, "Test description2", "Test2", "Station2", false, "1991-04-05", false, false, 0, "1999-08-14", null);
+		Event test3 = new Event("Test Name3", false, "Test description3", "Test3", "Station3", false, "1991-04-05", false, false, 0, "1999-08-14", null);
+		Event test4 = new Event("Test Name4", false, "Test description4", "Test4", "Station4", false, "1991-04-05", false, false, 0, "1999-08-14", "1999-08-14");
+		Event test5 = new Event("Test Name5", false, "Test description5", "Test5", "Station5", false, "1991-04-05", false, false, 0, "1999-08-14", null);
 		testData.addElement(test1);
 		testData.addElement(test2);
 		testData.addElement(test3);
@@ -209,9 +193,6 @@ public class MainGUI extends Application{
 
         	// Item here is the table view type:
         	Event item = table.getItems().get(row);
-        	System.out.println("WE NEED DATA: "+ item.getAuthor());
-        	System.out.println("WE NEED DATA: "+ item.getName());
-        	System.out.println("WE NEED DATA: "+ item.getDescription());
         	//TableColumn col = pos.getTableColumn();
         	EventViewGUI box = new EventViewGUI(this, item);
 
@@ -236,6 +217,16 @@ public class MainGUI extends Application{
 		stage.setTitle("Projektas");
 		stage.show();
 		
+		
+		
 		this.stage = stage;
 		}
+	
+	public EventList getPublicEvents(String target, LocalDate Begin, LocalDate End)    {
+	    EventList data = new EventList();
+	    
+	   
+	    return(data);
+	 }
+	
 	}

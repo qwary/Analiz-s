@@ -48,16 +48,15 @@ public class EventViewGUI {
 	//	username = new TextField();
 		//password = new PasswordField();
 		
-		table.setEditable(true);
-		TableColumn firstNameCol = new TableColumn("Autorius");
-		firstNameCol.setCellValueFactory(
+		TableColumn AuthorCol = new TableColumn("Author");
+		AuthorCol.setCellValueFactory(
                 new PropertyValueFactory<>("author"));
 		
-		TableColumn lastNameCol = new TableColumn("Pavadinimas");
-		lastNameCol.setCellValueFactory(
+		TableColumn nameCol = new TableColumn("Name");
+		nameCol.setCellValueFactory(
                 new PropertyValueFactory<>("name"));
 		
-		TableColumn emailCol = new TableColumn("Aprasymas");
+		TableColumn emailCol = new TableColumn("Description");
 		emailCol.setCellValueFactory(
                 new PropertyValueFactory<>("description"));
 		
@@ -73,7 +72,11 @@ public class EventViewGUI {
 		expirationCol.setCellValueFactory(
                 new PropertyValueFactory<>("expirationDate"));
 		
-		table.getColumns().addAll(firstNameCol, lastNameCol, emailCol, stationCol, creationCol, expirationCol);
+		TableColumn occurCol = new TableColumn("Last Occurance");
+		occurCol.setCellValueFactory(
+                new PropertyValueFactory<>("occurance"));
+		
+		table.getColumns().addAll(AuthorCol, nameCol, emailCol, stationCol, creationCol, expirationCol, occurCol);
 		data.add(eventData);
 		table.setItems(data);
 		

@@ -119,9 +119,6 @@ public class SearchEventGUI {
 
         	// Item here is the table view type:
         	Event item = table.getItems().get(row);
-        	System.out.println("WE NEED DATA: "+ item.getAuthor());
-        	System.out.println("WE NEED DATA: "+ item.getName());
-        	System.out.println("WE NEED DATA: "+ item.getDescription());
         	//TableColumn col = pos.getTableColumn();
         	EventViewGUI box = new EventViewGUI(main, item);
 
@@ -150,21 +147,21 @@ public class SearchEventGUI {
 	public EventList getEvents(String author)
 	{
 		EventList temp = new EventList();
-		temp.addElement(new Event(author, author, author, author, author, author));
-		temp.addElement(new Event(author, author, author, author, author, author));
-		temp.addElement(new Event(author, author, author, author, author, author));
-		temp.addElement(new Event(author, author, author, author, author, author));
-		temp.addElement(new Event(author, author, author, author, author, author));
-		temp.addElement(new Event(author, author, author, author, author, author));
-		temp.addElement(new Event(author, author, author, author, author, author));
-		temp.addElement(new Event(author, author, author, author, author, author));
-		temp.addElement(new Event(author, author, author, author, author, author));
-		temp.addElement(new Event(author, author, author, author, author, author));
-		temp.addElement(new Event(author, author, author, author, author, author));
-		temp.addElement(new Event(author, author, author, author, author, author));
-		temp.addElement(new Event(author, author, author, author, author, author));
-		temp.addElement(new Event(author, author, author, author, author, author));
-		temp.addElement(new Event(author, author, author, author, author, author));
+		temp.addElement(new Event(author, false, author, author, author, false, author, false, false, 0, author, author));
+		temp.addElement(new Event(author, false, author, author, author, false, author, false, false, 0, author, author));
+		temp.addElement(new Event(author, false, author, author, author, false, author, false, false, 0, author, author));
+		temp.addElement(new Event(author, false, author, author, author, false, author, false, false, 0, author, author));
+		temp.addElement(new Event(author, false, author, author, author, false, author, false, false, 0, author, author));
+		temp.addElement(new Event(author, false, author, author, author, false, author, false, false, 0, author, author));
+		temp.addElement(new Event(author, false, author, author, author, false, author, false, false, 0, author, author));
+		temp.addElement(new Event(author, false, author, author, author, false, author, false, false, 0, author, author));
+		temp.addElement(new Event(author, false, author, author, author, false, author, false, false, 0, author, author));
+		temp.addElement(new Event(author, false, author, author, author, false, author, false, false, 0, author, author));
+		temp.addElement(new Event(author, false, author, author, author, false, author, false, false, 0, author, author));
+		temp.addElement(new Event(author, false, author, author, author, false, author, false, false, 0, author, author));
+		temp.addElement(new Event(author, false, author, author, author, false, author, false, false, 0, author, author));
+		temp.addElement(new Event(author, false, author, author, author, false, author, false, false, 0, author, author));
+		temp.addElement(new Event(author, false, author, author, author, false, author, false, false, 0, author, author));
 		
 		return temp;
 	}
